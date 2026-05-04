@@ -2,106 +2,96 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pro Wheel Game</title>
+<title>Fun Target Game</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background: radial-gradient(circle, #1a1a1a, #000);
+  background:url("https://i.ibb.co/7QpKsCX/shiv.jpg") no-repeat center/cover;
   color:white;
   text-align:center;
 }
 
 /* TOP BAR */
-.topbar{
+.top{
   display:flex;
   justify-content:space-between;
   padding:10px;
-  background:linear-gradient(to right,#000,#222,#000);
-  border-bottom:2px solid gold;
 }
-
 .box{
-  background:#111;
-  padding:8px 12px;
+  background:linear-gradient(gold,#b8860b);
+  color:black;
+  padding:8px 15px;
   border-radius:10px;
-  border:1px solid gold;
   box-shadow:0 0 10px gold;
 }
 
-/* GAME AREA */
-.game{
+/* WHEEL AREA */
+.wheel-wrapper{
   position:relative;
-  margin-top:20px;
-}
-
-/* GLOW RING */
-.ring{
-  position:absolute;
-  width:340px;
-  height:340px;
-  border-radius:50%;
-  left:50%;
-  transform:translateX(-50%);
-  box-shadow:0 0 40px gold, inset 0 0 30px gold;
+  width:300px;
+  margin:20px auto;
 }
 
 /* POINTER */
 .pointer{
-  width:0;
-  height:0;
-  border-left:20px solid transparent;
-  border-right:20px solid transparent;
-  border-bottom:35px solid red;
-  margin:auto;
-  filter: drop-shadow(0 0 10px red);
+  width:0;height:0;
+  border-left:18px solid transparent;
+  border-right:18px solid transparent;
+  border-bottom:30px solid red;
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
 }
 
-/* WHEEL */
+/* WHEEL IMAGE */
 #wheel{
   width:300px;
-  margin:20px auto;
-  display:block;
-  border-radius:50%;
-  border:6px solid gold;
   transition:transform 4s cubic-bezier(.17,.67,.83,.67);
-  box-shadow:0 0 20px gold;
+  filter:drop-shadow(0 0 20px gold);
 }
 
 /* COINS */
 .coins{
-  position:absolute;
-  bottom:-20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:240px;
-  opacity:0.9;
-  animation: glow 1.5s infinite alternate;
+  width:220px;
+  margin-top:-60px;
 }
 
-@keyframes glow{
-  from{ filter:brightness(1); }
-  to{ filter:brightness(1.7); }
+/* BUTTONS */
+.buttons{
+  margin-top:10px;
 }
-
-/* TIMER */
-#timer{
-  font-size:22px;
-  color:#ffd700;
-  text-shadow:0 0 10px gold;
-}
-
-/* BUTTON */
 button{
-  padding:10px 25px;
-  font-size:18px;
+  padding:10px 15px;
+  margin:5px;
+  border:none;
+  border-radius:20px;
   background:red;
   color:white;
-  border:none;
-  border-radius:10px;
-  margin-top:20px;
-  box-shadow:0 0 10px red;
+  font-size:16px;
+}
+
+/* NUMBERS */
+.numbers{
+  margin-top:15px;
+}
+.num{
+  display:inline-block;
+  width:45px;
+  height:45px;
+  line-height:45px;
+  border-radius:50%;
+  margin:5px;
+  background:orange;
+  box-shadow:0 0 10px gold;
+}
+
+#timer{
+  color:yellow;
+  font-weight:bold;
 }
 
 </style>
@@ -109,31 +99,44 @@ button{
 
 <body>
 
-<div class="topbar">
-  <div class="box">Score: 2000</div>
+<div class="top">
+  <div class="box">Score: 1839</div>
   <div class="box">Time: <span id="timer">60</span></div>
-  <div class="box">Last: 2 8 5 1</div>
+  <div class="box">Winner: 0</div>
 </div>
 
-<div class="game">
-
+<div class="wheel-wrapper">
   <div class="pointer"></div>
 
-  <div class="ring"></div>
-
-  <!-- WHEEL -->
+  <!-- WHEEL PNG -->
   <img id="wheel" src="https://i.ibb.co/6bQJY0P/wheel.png">
 
   <!-- COINS -->
   <img class="coins" src="https://i.ibb.co/0jQ0Zxq/coins.png">
-
 </div>
 
-<button onclick="startGame()">Start Game</button>
+<div class="buttons">
+  <button onclick="startGame()">Start</button>
+  <button>Cancel Bet</button>
+  <button>Bet OK</button>
+</div>
+
+<div class="numbers">
+  <div class="num">1</div>
+  <div class="num">2</div>
+  <div class="num">3</div>
+  <div class="num">4</div>
+  <div class="num">5</div>
+  <div class="num">6</div>
+  <div class="num">7</div>
+  <div class="num">8</div>
+  <div class="num">9</div>
+  <div class="num">0</div>
+</div>
 
 <script>
 
-let resultNumber = 4; // 👉 result control
+let resultNumber = 6; // 👉 yaha result control karega
 
 function startGame(){
   let time = 60;
@@ -154,7 +157,8 @@ function spinWheel(num){
 
   let anglePerNumber = 360 / 10;
 
-  let finalAngle = (360 * 7) + (anglePerNumber * num);
+  // pointer top pe hai → adjust
+  let finalAngle = (360 * 6) + (anglePerNumber * num);
 
   wheel.style.transform = "rotate(" + finalAngle + "deg)";
 }
