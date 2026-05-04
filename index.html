@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1 Min Wheel Game</title>
+  <style>
+    body { text-align:center; font-family:Arial; background:black; color:white; }
+    #wheel {
+      width:200px;
+      height:200px;
+      border:10px solid gold;
+      border-radius:50%;
+      margin:50px auto;
+      transition: transform 4s ease-out;
+    }
+    button { padding:10px 20px; font-size:18px; }
+  </style>
+</head>
+
+<body>
+
+<h2>1 Minute Game</h2>
+<h3 id="timer">60</h3>
+
+<div id="wheel"></div>
+
+<button onclick="startGame()">Start</button>
+
+<script>
+let resultNumber = 5; // 👉 yaha tu apna result set karega (0-9)
+
+function startGame(){
+  let time = 60;
+  let timer = setInterval(()=>{
+    document.getElementById("timer").innerText = time;
+    time--;
+
+    if(time < 0){
+      clearInterval(timer);
+      spinWheel(resultNumber);
+    }
+  },1000);
+}
+
+function spinWheel(num){
+  let wheel = document.getElementById("wheel");
+
+  // har number ka angle (10 numbers)
+  let anglePerNumber = 360 / 10;
+
+  // final angle calculate
+  let finalAngle = (360 * 5) + (anglePerNumber * num);
+
+  wheel.style.transform = "rotate(" + finalAngle + "deg)";
+}
+</script>
+
+</body>
+</html>
