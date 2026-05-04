@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casino Wheel Game</title>
+<title>Pro Wheel Game</title>
 
 <style>
 body{
   margin:0;
-  background:url("https://i.ibb.co/7QpKsCX/shiv.jpg") no-repeat center/cover;
   font-family:Arial;
+  background: radial-gradient(circle, #1a1a1a, #000);
   color:white;
   text-align:center;
 }
@@ -18,7 +18,7 @@ body{
   display:flex;
   justify-content:space-between;
   padding:10px;
-  background:rgba(0,0,0,0.7);
+  background:linear-gradient(to right,#000,#222,#000);
   border-bottom:2px solid gold;
 }
 
@@ -27,6 +27,7 @@ body{
   padding:8px 12px;
   border-radius:10px;
   border:1px solid gold;
+  box-shadow:0 0 10px gold;
 }
 
 /* GAME AREA */
@@ -35,14 +36,26 @@ body{
   margin-top:20px;
 }
 
+/* GLOW RING */
+.ring{
+  position:absolute;
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 40px gold, inset 0 0 30px gold;
+}
+
 /* POINTER */
 .pointer{
   width:0;
   height:0;
-  border-left:18px solid transparent;
-  border-right:18px solid transparent;
-  border-bottom:30px solid red;
+  border-left:20px solid transparent;
+  border-right:20px solid transparent;
+  border-bottom:35px solid red;
   margin:auto;
+  filter: drop-shadow(0 0 10px red);
 }
 
 /* WHEEL */
@@ -50,29 +63,33 @@ body{
   width:300px;
   margin:20px auto;
   display:block;
-  transition:transform 4s ease-out;
-  filter: drop-shadow(0 0 20px gold);
+  border-radius:50%;
+  border:6px solid gold;
+  transition:transform 4s cubic-bezier(.17,.67,.83,.67);
+  box-shadow:0 0 20px gold;
 }
 
 /* COINS */
 .coins{
   position:absolute;
-  bottom:0;
+  bottom:-20px;
   left:50%;
   transform:translateX(-50%);
-  width:220px;
+  width:240px;
+  opacity:0.9;
   animation: glow 1.5s infinite alternate;
 }
 
 @keyframes glow{
   from{ filter:brightness(1); }
-  to{ filter:brightness(1.6); }
+  to{ filter:brightness(1.7); }
 }
 
 /* TIMER */
 #timer{
   font-size:22px;
-  color:yellow;
+  color:#ffd700;
+  text-shadow:0 0 10px gold;
 }
 
 /* BUTTON */
@@ -84,6 +101,7 @@ button{
   border:none;
   border-radius:10px;
   margin-top:20px;
+  box-shadow:0 0 10px red;
 }
 
 </style>
@@ -91,38 +109,41 @@ button{
 
 <body>
 
-<!-- TOP -->
 <div class="topbar">
-  <div class="box">Score: 1200</div>
+  <div class="box">Score: 2000</div>
   <div class="box">Time: <span id="timer">60</span></div>
-  <div class="box">Last: 3 7 2 9</div>
+  <div class="box">Last: 2 8 5 1</div>
 </div>
 
-<!-- GAME -->
 <div class="game">
+
   <div class="pointer"></div>
 
-  <!-- WHEEL IMAGE -->
+  <div class="ring"></div>
+
+  <!-- WHEEL -->
   <img id="wheel" src="https://i.ibb.co/6bQJY0P/wheel.png">
 
   <!-- COINS -->
   <img class="coins" src="https://i.ibb.co/0jQ0Zxq/coins.png">
+
 </div>
 
 <button onclick="startGame()">Start Game</button>
 
 <script>
-let resultNumber = 6; // 👉 yaha result set kare (0-9)
+
+let resultNumber = 4; // 👉 result control
 
 function startGame(){
   let time = 60;
 
-  let timer = setInterval(()=>{
+  let t = setInterval(()=>{
     document.getElementById("timer").innerText = time;
     time--;
 
     if(time < 0){
-      clearInterval(timer);
+      clearInterval(t);
       spinWheel(resultNumber);
     }
   },1000);
@@ -133,10 +154,11 @@ function spinWheel(num){
 
   let anglePerNumber = 360 / 10;
 
-  let finalAngle = (360 * 6) + (anglePerNumber * num);
+  let finalAngle = (360 * 7) + (anglePerNumber * num);
 
   wheel.style.transform = "rotate(" + finalAngle + "deg)";
 }
+
 </script>
 
 </body>
