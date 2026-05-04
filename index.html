@@ -2,42 +2,46 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real Style Game</title>
+<title>Wheel Game</title>
 
 <style>
 body{
   margin:0;
   background:black;
-  text-align:center;
   font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
 
-/* MAIN BOX */
+/* MAIN GAME BOX */
 .game{
   position:relative;
-  width:360px;
-  margin:auto;
+  width:100%;
+  max-width:500px;
 }
 
-/* FULL BACKGROUND (tera screenshot jaisa) */
+/* BACKGROUND IMAGE */
 .bg{
   width:100%;
+  height:auto;
 }
 
-/* WHEEL (upar ghumega) */
+/* WHEEL */
 #wheel{
   position:absolute;
-  top:115px;   /* adjust if needed */
+  top:32%;
   left:50%;
-  transform:translateX(-50%);
-  width:200px;
+  transform:translate(-50%, -50%);
+  width:40%;
   transition:transform 4s ease-out;
 }
 
 /* POINTER */
 .pointer{
   position:absolute;
-  top:95px;
+  top:18%;
   left:50%;
   transform:translateX(-50%);
   width:0;
@@ -50,7 +54,7 @@ body{
 /* TIMER */
 .timer{
   position:absolute;
-  top:10px;
+  top:5%;
   left:50%;
   transform:translateX(-50%);
   color:yellow;
@@ -60,8 +64,11 @@ body{
 
 /* BUTTON */
 button{
-  margin-top:15px;
-  padding:10px 20px;
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:10px 25px;
   font-size:18px;
   background:red;
   color:white;
@@ -69,6 +76,7 @@ button{
   border-radius:10px;
 }
 </style>
+
 </head>
 
 <body>
@@ -76,7 +84,7 @@ button{
 <div class="game">
 
   <!-- FULL DESIGN IMAGE -->
-  <img class="bg" src="https://i.imgur.com/your-full-image.png">
+  <img class="bg" src="YOUR_FULL_IMAGE_LINK">
 
   <!-- TIMER -->
   <div class="timer">Time: <span id="timer">60</span></div>
@@ -84,8 +92,8 @@ button{
   <!-- POINTER -->
   <div class="pointer"></div>
 
-  <!-- CUT WHEEL PNG -->
-  <img id="wheel" src="https://i.imgur.com/your-wheel.png">
+  <!-- WHEEL PNG -->
+  <img id="wheel" src="YOUR_WHEEL_IMAGE_LINK">
 
 </div>
 
@@ -114,7 +122,7 @@ function spinWheel(num){
 
   let angle = (360 * 6) + (36 * num);
 
-  wheel.style.transform = "translateX(-50%) rotate(" + angle + "deg)";
+  wheel.style.transform = "translate(-50%, -50%) rotate(" + angle + "deg)";
 }
 
 </script>
