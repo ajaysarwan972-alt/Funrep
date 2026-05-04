@@ -8,44 +8,40 @@
 body{
   margin:0;
   background:black;
-  font-family:Arial;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
 }
 
-/* MAIN GAME BOX */
+/* GAME */
 .game{
   position:relative;
-  width:100%;
-  max-width:500px;
+  width:90%;
+  max-width:400px;
 }
 
-/* BACKGROUND IMAGE */
+/* BG */
 .bg{
   width:100%;
-  height:auto;
 }
 
 /* WHEEL */
 #wheel{
   position:absolute;
-  top:32%;
+  top:35%;
   left:50%;
-  transform:translate(-50%, -50%);
-  width:40%;
+  transform:translate(-50%,-50%);
+  width:45%;
   transition:transform 4s ease-out;
 }
 
 /* POINTER */
 .pointer{
   position:absolute;
-  top:18%;
+  top:22%;
   left:50%;
   transform:translateX(-50%);
-  width:0;
-  height:0;
   border-left:15px solid transparent;
   border-right:15px solid transparent;
   border-bottom:25px solid red;
@@ -58,17 +54,16 @@ body{
   left:50%;
   transform:translateX(-50%);
   color:yellow;
-  font-size:18px;
+  font-size:20px;
   font-weight:bold;
 }
 
-/* BUTTON */
 button{
   position:fixed;
-  bottom:20px;
+  bottom:30px;
   left:50%;
   transform:translateX(-50%);
-  padding:10px 25px;
+  padding:12px 30px;
   font-size:18px;
   background:red;
   color:white;
@@ -76,15 +71,14 @@ button{
   border-radius:10px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="game">
 
-  <!-- FULL DESIGN IMAGE -->
-  <img class="bg" src="YOUR_FULL_IMAGE_LINK">
+  <!-- WORKING BG -->
+  <img class="bg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Roulette_wheel.png/512px-Roulette_wheel.png">
 
   <!-- TIMER -->
   <div class="timer">Time: <span id="timer">60</span></div>
@@ -92,15 +86,14 @@ button{
   <!-- POINTER -->
   <div class="pointer"></div>
 
-  <!-- WHEEL PNG -->
-  <img id="wheel" src="YOUR_WHEEL_IMAGE_LINK">
+  <!-- WORKING WHEEL -->
+  <img id="wheel" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Roulette_wheel.png/512px-Roulette_wheel.png">
 
 </div>
 
 <button onclick="startGame()">Start</button>
 
 <script>
-
 let resultNumber = 5;
 
 function startGame(){
@@ -119,12 +112,9 @@ function startGame(){
 
 function spinWheel(num){
   let wheel = document.getElementById("wheel");
-
   let angle = (360 * 6) + (36 * num);
-
-  wheel.style.transform = "translate(-50%, -50%) rotate(" + angle + "deg)";
+  wheel.style.transform = "translate(-50%,-50%) rotate(" + angle + "deg)";
 }
-
 </script>
 
 </body>
