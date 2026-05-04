@@ -1,35 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1 Min Wheel Game</title>
-  <style>
-    body { text-align:center; font-family:Arial; background:black; color:white; }
-    #wheel {
-      width:200px;
-      height:200px;
-      border:10px solid gold;
-      border-radius:50%;
-      margin:50px auto;
-      transition: transform 4s ease-out;
-    }
-    button { padding:10px 20px; font-size:18px; }
-  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casino Wheel Game</title>
+
+<style>
+body{
+  margin:0;
+  background:url("https://i.ibb.co/7QpKsCX/shiv.jpg") no-repeat center/cover;
+  font-family:Arial;
+  color:white;
+  text-align:center;
+}
+
+/* TOP BAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  background:rgba(0,0,0,0.7);
+  border-bottom:2px solid gold;
+}
+
+.box{
+  background:#111;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid gold;
+}
+
+/* GAME AREA */
+.game{
+  position:relative;
+  margin-top:20px;
+}
+
+/* POINTER */
+.pointer{
+  width:0;
+  height:0;
+  border-left:18px solid transparent;
+  border-right:18px solid transparent;
+  border-bottom:30px solid red;
+  margin:auto;
+}
+
+/* WHEEL */
+#wheel{
+  width:300px;
+  margin:20px auto;
+  display:block;
+  transition:transform 4s ease-out;
+  filter: drop-shadow(0 0 20px gold);
+}
+
+/* COINS */
+.coins{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:220px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+  from{ filter:brightness(1); }
+  to{ filter:brightness(1.6); }
+}
+
+/* TIMER */
+#timer{
+  font-size:22px;
+  color:yellow;
+}
+
+/* BUTTON */
+button{
+  padding:10px 25px;
+  font-size:18px;
+  background:red;
+  color:white;
+  border:none;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+</style>
 </head>
 
 <body>
 
-<h2>1 Minute Game</h2>
-<h3 id="timer">60</h3>
+<!-- TOP -->
+<div class="topbar">
+  <div class="box">Score: 1200</div>
+  <div class="box">Time: <span id="timer">60</span></div>
+  <div class="box">Last: 3 7 2 9</div>
+</div>
 
-<div id="wheel"></div>
+<!-- GAME -->
+<div class="game">
+  <div class="pointer"></div>
 
-<button onclick="startGame()">Start</button>
+  <!-- WHEEL IMAGE -->
+  <img id="wheel" src="https://i.ibb.co/6bQJY0P/wheel.png">
+
+  <!-- COINS -->
+  <img class="coins" src="https://i.ibb.co/0jQ0Zxq/coins.png">
+</div>
+
+<button onclick="startGame()">Start Game</button>
 
 <script>
-let resultNumber = 5; // 👉 yaha tu apna result set karega (0-9)
+let resultNumber = 6; // 👉 yaha result set kare (0-9)
 
 function startGame(){
   let time = 60;
+
   let timer = setInterval(()=>{
     document.getElementById("timer").innerText = time;
     time--;
@@ -44,11 +131,9 @@ function startGame(){
 function spinWheel(num){
   let wheel = document.getElementById("wheel");
 
-  // har number ka angle (10 numbers)
   let anglePerNumber = 360 / 10;
 
-  // final angle calculate
-  let finalAngle = (360 * 5) + (anglePerNumber * num);
+  let finalAngle = (360 * 6) + (anglePerNumber * num);
 
   wheel.style.transform = "rotate(" + finalAngle + "deg)";
 }
